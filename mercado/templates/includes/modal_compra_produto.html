@@ -1,0 +1,39 @@
+<div
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  id="modal_chat-{{p.id}}"
+  aria-labelledby="modal_chatLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content rounded-3 shadow">
+      <div class="modal-body p-4 text-center">
+        <h5 class="mb-0">comprar {{p.nome}}</h5>
+        <p class="mb-0">
+          Deseja iniciar uma bate-papo com {{p.nome}} por ${{p.preco}}?
+        </p>
+      </div>
+      <div class="modal-footer flex-nowrap p-0">
+        <form action="" method="POST">
+          {{compra_produto.hidden_tag()}}
+          <input
+            id="produto_comprado"
+            name="produto_comprado"
+            type="hidden"
+            value="{{p.nome}}"
+          />
+          {{compra_produto.submit(class="btn btn-lg btn-outline-success fs-6
+          text-decoration-none col-6 py-3 m-0 rounded-0 border-end")}}
+        </form>
+        <button
+          type="button"
+          class="btn btn-lg btn-outline-danger fs-6 text-decoration-none col-6 py-3 m-0 rounded-0"
+          data-bs-dismiss="modal"
+        >
+          Não, eu não quero
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+{%extends 'base.html'%} {% block title%} Produtos {%endblock%} {%block
+lista_status%} active {%endblock%} {% block conteudo%}
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <h2>Produtos disponiveis</h2>
+      <br />
+      <p>Aqui se encontram os Produtos que estão disponiveis para conversas</p>
+      <br />
+      <div class="container">
+        <table class="table table-dark table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Opções</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for p in produtos%}
+            {%include './includes/modal_desc_produto.html'%} 
+            {% include './includes/modal_compra_produto.html' %}
+            <tr>
+              <td>{{p.id}}</td>
+              <td>{{p.nome}}</td>
+              <td>{{p.preco}}</td>
+              <td>
+                <div
+                  class="justify-content-start"
+                  role="group"
+                >
+                  <button
+                    type="button"
+                    class="btn btn-outline-light"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal_desc-{{p.id}}"
+                  >
+                    Sobre
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-success"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal_chat-{{p.id}}"
+                  >
+                    Comprar
+                  </button>
+                </div>
+              </td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-4">
+      <h2>Produtos comprados</h2>
+      <br />
+      <p>
+        Aqui se encontram os produtos que você adquiriu.
+      </p>
+
+      {% for p in produtos_adquiridos %} {% include "includes/modal_vende_produto.html"
+      %}
+      <div
+        class="card text-center"
+        style="width: 18rem; background-color: rgb(48, 41, 41); color: white"
+      >
+        <div class="card-body">
+          <h5 class="card-title">{{p.nome}}</h5>
+          <p class="card-text">{{p.descricao}}</p>
+          <button
+            class="btn btn-outline-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#modal_venda-{{p.id}}"
+            type="button"
+          >
+            Vender Produto
+          </button>
+        </div>
+      </div>
+      <br />
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{%endblock%}

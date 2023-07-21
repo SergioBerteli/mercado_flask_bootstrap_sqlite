@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title%} {%endblock%}</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/ce3c2bb1c5.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      body {
+        background-color: rgb(0, 0, 0);
+        color: white;
+      }
+      .modal {
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg bg-body-tertiary navbar bg-dark border-bottom border-bottom-dark"
+      data-bs-theme="dark"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{{url_for('pagina_inicial')}}"
+          >Mercado</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarText"
+          aria-controls="navbarText"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link {%block PI_status%}{%endblock%}"
+                aria-current="page"
+                href="{{url_for('pagina_inicial')}}"
+                >Página Inicial</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {%block lista_status%}{%endblock%}"
+                href="{{url_for('lista_produtos')}}"
+                >Produtos</a
+              >
+            </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link {%block reg_status%}{%endblock%}"
+                href="{{url_for('registra_produto')}}"
+                >Registre o seu produto!</a
+              >
+            </li>
+
+          </ul>
+          {%if current_user.is_authenticated%}
+          <ul class="navbar-nav justify-content-end mb-2 mb-lg-0">
+            <li class="nav-item">
+              <div class="nav-link text-light-emphasis">
+                Seja bem-vindo, {{current_user.username}}!
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="nav-link" style="color: greenyellow">
+                <i class="fa-solid fa-money-bill"></i>
+                ${{current_user.saldo_mais_bonito}}
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="{{url_for('logout')}}" class="nav-link text-danger">
+                Sair
+              </a>
+            </li>
+          </ul>
+          {%else%}
+          <form class="btn-group">
+            <a
+              class="btn btn-outline-success"
+              href="{{url_for('entrar_conta')}}"
+              >Entrar</a
+            >
+            <a class="btn btn-outline-light" href="{{url_for('cria_conta')}}">
+              Registrar
+            </a>
+          </form>
+          {%endif%}
+        </div>
+      </div>
+    </nav>
+
+    {%with messages = get_flashed_messages(with_categories=true)%} {%if
+    messages%} {%for category, message in messages %}
+    <div class="alert alert-{{ category }}" role="alert">
+      <button
+        type="button"
+        class="m1-2 mb-1 close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message }}
+    </div>
+    {%endfor%} {%endif%} {%endwith%} {% block conteudo%} {%endblock%}
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.js"
+      integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<div
+  class="modal fade"
+  aria-hidden="true"
+  tabindex="-1"
+  role="dialog"
+  id="modal_venda-{{p.id}}"
+>
+  <div class="modal-dialog">
+    <div class="modal-content rounded-3 shadow">
+      <div class="modal-body p-4 text-center">
+        <h5 class="mb-0">Vender {{p.nome}}</h5>
+        <p class="mb-0">Você realmente deseja vender o {{p.nome}} por ${{p.preco}}?</p>
+      </div>
+        <form action="" method="POST" class="modal-footer flex-nowrap p-0">
+          {{vende_produto.hidden_tag()}}
+          <input
+            id="produto_vendido"
+            name="produto_vendido"
+            type="hidden"
+            value="{{p.id}}"
+          />
+
+          {{vende_produto.submit(class="btn btn-lg btn-outline-success fs-6
+          text-decoration-none col-6 py-3 m-0 rounded-0")}}
+          <button
+          type="button"
+          class="btn btn-lg btn-outline-danger fs-6 text-decoration-none col-6 py-3 m-0 rounded-0"
+          data-bs-dismiss="modal"
+        >
+          Não, eu não quero
+        </button>
+        </form>
+    </div>
+  </div>
+</div>

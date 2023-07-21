@@ -1,0 +1,19 @@
+{%extends 'base.html'%} {% block title%} Página Inicial {%endblock%} {%block
+PI_status%} active {%endblock%} {% block conteudo%}
+<div class="d-flex h-100 text-center text-bg-dark">
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <main class="px-3">
+      <h1>Bem vindo ao Mercado!</h1>
+      <br />
+      <p class="lead">Aqui você pode comprar, vender e registrar produtos!</p>
+      <p class="lead">
+        <a
+          href="{{url_for('lista_produtos')}}"
+          class="btn btn-lg btn-light fw-bold border-white bg-white"
+          >Começar já!</a
+        >
+      </p>
+    </main>
+  </div>
+</div>
+{%endblock%}
